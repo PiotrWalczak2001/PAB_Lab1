@@ -8,6 +8,7 @@ namespace Lab1_ex5
         {
             // 5.Napisz program wypisujacy w konsoli akualny lokalny i globalny czas.
             Console.WriteLine("Lab1 Ex5");
+            Console.WriteLine(DateTime.Now);
         }
     }
 }
