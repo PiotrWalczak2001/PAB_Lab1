@@ -7,9 +7,13 @@ namespace VirtualAcademy.Api.Controllers
     public class AcademyController : ControllerBase
     {
         [HttpGet]
+        [Route("all")]
         public async Task<IActionResult> GetAllAcademies()
         {
-            return Ok("Academies");
+            List<string> list = new List<string>();
+            list.Add("WSEI");
+            list.Add("AGH");
+            return Ok(list);
         }
     }
 }

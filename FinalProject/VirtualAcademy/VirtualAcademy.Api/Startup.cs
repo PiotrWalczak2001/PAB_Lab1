@@ -15,6 +15,7 @@ namespace VirtualAcademy.Api
             AddSwagger(services);
 
             services.AddControllers();
+            services.AddCors();
         }
 
         private static void AddSwagger(IServiceCollection services)
@@ -41,13 +42,15 @@ namespace VirtualAcademy.Api
 
             app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Virtual Academy API");
             });
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
