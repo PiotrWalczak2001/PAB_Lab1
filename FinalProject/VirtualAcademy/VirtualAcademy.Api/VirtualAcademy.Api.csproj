@@ -14,4 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualAcademy.Application\VirtualAcademy.Application.csproj" />
+    <ProjectReference Include="..\VirtualAcademy.Persistence\VirtualAcademy.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

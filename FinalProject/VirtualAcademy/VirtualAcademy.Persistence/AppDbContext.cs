@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VirtualAcademy.Domain.Entities;
+using File = VirtualAcademy.Domain.Entities.File;
 
 namespace VirtualAcademy.Persistence
 {
@@ -14,7 +15,7 @@ namespace VirtualAcademy.Persistence
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Domain.Entities.File> Files { get; set; }
+        public DbSet<File> Files { get; set; }
         public DbSet<FileContent> FileContents { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
