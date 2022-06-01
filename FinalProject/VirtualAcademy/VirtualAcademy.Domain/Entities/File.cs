@@ -9,7 +9,7 @@
         public Academy Academy { get; set; }
         public Guid FileContentId { get; set; }
         public FileContent Content { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

@@ -16,5 +16,6 @@ namespace VirtualAcademy.Domain.Entities
         public IEnumerable<SubjectMark> InitialMarks { get; set; }
         public SemesterStatusEnum Status { get; set; }
         public bool IsClosed { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

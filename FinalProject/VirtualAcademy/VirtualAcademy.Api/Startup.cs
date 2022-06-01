@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using VirtualAcademy.Persistence;
 
 namespace VirtualAcademy.Api
 {
@@ -13,6 +14,8 @@ namespace VirtualAcademy.Api
         public void ConfigureServices(IServiceCollection services)
         {
             AddSwagger(services);
+
+            services.AddPersistenceServices(Configuration);
 
             services.AddControllers();
             services.AddCors();

@@ -23,6 +23,6 @@ namespace VirtualAcademy.Domain.Common
         public string PrivateEmail { get; set; }
         public string AcademyEmail { get; set; }
         public string PhoneNumber { get; set; }
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
