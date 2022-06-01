@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VirtualAcademy.Application\VirtualAcademy.Application.csproj" />
     <ProjectReference Include="..\VirtualAcademy.Persistence\VirtualAcademy.Persistence.csproj" />
   </ItemGroup>
 

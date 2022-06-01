@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtualAcademy.Domain\VirtualAcademy.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Employee\Commands\" />
+    <Folder Include="Features\Employee\Models\" />
+    <Folder Include="Features\Employee\Queries\" />
+    <Folder Include="Features\Employee\Services\" />
+    <Folder Include="Features\Course\Commands\" />
+    <Folder Include="Features\Course\Models\" />
+    <Folder Include="Features\Course\Queries\" />
+    <Folder Include="Features\Course\Services\" />
+    <Folder Include="Features\File\Commands\" />
+    <Folder Include="Features\File\Models\" />
+    <Folder Include="Features\File\Queries\" />
+    <Folder Include="Features\File\Services\" />
+    <Folder Include="Features\Group\Commands\" />
+    <Folder Include="Features\Group\Models\" />
+    <Folder Include="Features\Group\Queries\" />
+    <Folder Include="Features\Group\Services\" />
+    <Folder Include="Features\Lecturer\Commands\" />
+    <Folder Include="Features\Lecturer\Models\" />
+    <Folder Include="Features\Lecturer\Queries\" />
+    <Folder Include="Features\Lecturer\Services\" />
+    <Folder Include="Features\Semester\Commands\" />
+    <Folder Include="Features\Semester\Models\" />
+    <Folder Include="Features\Semester\Queries\" />
+    <Folder Include="Features\Semester\Services\" />
+    <Folder Include="Features\Student\Commands\" />
+    <Folder Include="Features\Student\Models\" />
+    <Folder Include="Features\Student\Queries\" />
+    <Folder Include="Features\Student\Services\" />
+    <Folder Include="Features\Subject\Commands\" />
+    <Folder Include="Features\Subject\Models\" />
+    <Folder Include="Features\Subject\Queries\" />
+    <Folder Include="Features\Subject\Services\" />
+    <Folder Include="Features\Department\Commands\" />
+    <Folder Include="Features\Department\Models\" />
+    <Folder Include="Features\Department\Queries\" />
+    <Folder Include="Features\Department\Services\" />
+    <Folder Include="Features\Academy\Commands\" />
+    <Folder Include="Features\Academy\Models\" />
+    <Folder Include="Features\Academy\Services\" />
+    <Folder Include="Features\Academy\Queries\" />
+  </ItemGroup>
+
+</Project>

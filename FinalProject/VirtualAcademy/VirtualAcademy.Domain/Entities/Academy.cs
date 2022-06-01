@@ -1,4 +1,6 @@
-﻿namespace VirtualAcademy.Domain.Entities
+﻿using File = VirtualAcademy.Domain.Entities.File;
+
+namespace VirtualAcademy.Domain.Entities
 {
     public class Academy
     {
@@ -12,6 +14,6 @@
         public IEnumerable<Department> Departments { get; set; }
         public IEnumerable<Course> Courses { get; set; }
         public Guid? ImageId { get; set; }
-        public Entities.File ImageFile { get; set; }
+        public File ImageFile { get; set; }
     }
 }
