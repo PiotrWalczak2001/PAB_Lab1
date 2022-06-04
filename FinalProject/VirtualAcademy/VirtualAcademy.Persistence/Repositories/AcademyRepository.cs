@@ -5,5 +5,8 @@ namespace VirtualAcademy.Persistence.Repositories
 {
     public class AcademyRepository : BaseRepository<Academy>, IAcademyRepository
     {
+        public AcademyRepository(AppDbContext dbContext) : base(dbContext)
+        {
+        }
     }
 }

@@ -14,5 +14,7 @@ namespace VirtualAcademy.Domain.Entities
         public Course Course { get; set; }
         public Guid LecturerId { get; set; }
         public Lecturer Lecturer { get; set; }
+        public IEnumerable<SubjectGroup> SubjectGroups { get; set; }
+        public IEnumerable<SubjectMark> Marks { get; set; }
     }
 }

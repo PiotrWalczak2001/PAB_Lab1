@@ -13,6 +13,7 @@ namespace VirtualAcademy.Domain.Entities
         public IEnumerable<Student> Students { get; set; }
         public IEnumerable<Department> Departments { get; set; }
         public IEnumerable<Course> Courses { get; set; }
+        public IEnumerable<File> Files { get; set; }
         public Guid? ImageId { get; set; }
         public File ImageFile { get; set; }
     }

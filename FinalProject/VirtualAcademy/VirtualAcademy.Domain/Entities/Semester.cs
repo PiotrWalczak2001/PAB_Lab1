@@ -11,11 +11,12 @@ namespace VirtualAcademy.Domain.Entities
         public DateTime LastDate { get; set; }
         public SemesterTypeEnum SemesterType { get; set; }
         public Guid StudentId { get; set; }
-        public double? Average { get; set; }
         public Student Student { get; set; }
-        public IEnumerable<SubjectMark> InitialMarks { get; set; }
+        public double? Average { get; set; }
+        public IEnumerable<SubjectMark> Marks { get; set; }
         public SemesterStatusEnum Status { get; set; }
         public bool IsClosed { get; set; }
+        public bool IsCurrent { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

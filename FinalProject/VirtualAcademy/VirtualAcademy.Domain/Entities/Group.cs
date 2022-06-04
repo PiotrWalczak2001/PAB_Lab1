@@ -12,8 +12,7 @@ namespace VirtualAcademy.Domain.Entities
         public SubjectTypeEnum GroupType { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; }
-        public IEnumerable<Subject> Subjects { get; set; }
-        public IEnumerable<Student> Students { get; set; }
-        public IEnumerable<Lecturer> Lecturers { get; set; }
+        public IEnumerable<StudentGroup> StudentGroups { get; set; }
+        public IEnumerable<SubjectGroup> SubjectGroups { get; set; }
     }
 }

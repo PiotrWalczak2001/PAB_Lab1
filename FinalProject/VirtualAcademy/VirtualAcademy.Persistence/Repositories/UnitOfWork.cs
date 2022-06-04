@@ -5,10 +5,11 @@ namespace VirtualAcademy.Persistence.Repositories
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly AppDbContext _dbContext;
-        private readonly IAcademyRepository _academyRepository;
+        public  IAcademyRepository AcademyRepository { get; private set; }
         public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext = dbContext;
+            AcademyRepository = new AcademyRepository(_dbContext);
         }
 
         public async Task SaveChanges()

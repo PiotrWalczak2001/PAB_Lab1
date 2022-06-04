@@ -16,16 +16,16 @@ namespace VirtualAcademy.Domain.Entities
         public bool IsStudying { get; set; }
         public TitleEnum TitleAfterGraduation { get; set; }
         public YearOfStudyEnum YearOfStudy { get; set; }
-        public Guid SemesterId { get; set; }
-        public Semester Semester { get; set; }
+        public Guid CurrentSemesterId { get; set; }
+        public Semester CurrentSemester { get; set; }
+        public IEnumerable<Semester> Semesters { get; set; }
         public DateTime StartStudiesDate { get; set; }
         public DateTime ExpectedGraduationDate { get; set; }
         public DateTime RecruitmentDate { get; set; }
         public bool IndividualCourse { get; set; }
         public Guid CourseId { get; set; }
         public Course Course { get; set; }
-        public IEnumerable<SubjectMark> Marks { get; set; }
-        public IEnumerable<Group> Groups { get; set; }
+        public IEnumerable<StudentGroup> StudentGroups { get; set; }
         public IEnumerable<StudentNote> StudentNotes { get; set; }
     }
 }
