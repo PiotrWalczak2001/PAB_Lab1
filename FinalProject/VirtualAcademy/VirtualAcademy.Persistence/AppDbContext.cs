@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VirtualAcademy.Domain.Entities;
 using File = VirtualAcademy.Domain.Entities.File;
 
 namespace VirtualAcademy.Persistence
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -28,6 +29,8 @@ namespace VirtualAcademy.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Academy>().HasQueryFilter(x => x.IsDeleted != false);
             modelBuilder.Entity<Department>().HasQueryFilter(x => x.IsDeleted != false);
             modelBuilder.Entity<Course>().HasQueryFilter(x => x.IsDeleted != false);
