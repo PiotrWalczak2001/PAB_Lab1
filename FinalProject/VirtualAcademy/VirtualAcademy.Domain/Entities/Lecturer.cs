@@ -3,9 +3,9 @@
     public class Lecturer : Employee
     {
         public Guid DepartmentId { get; set; }
-        public Department Department { get; set; }
-        public IEnumerable<SubjectMark> Marks { get; set; }
-        public IEnumerable<Subject> Subjects { get; set; }
-        public IEnumerable<StudentNote> StudentNotes { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual IEnumerable<SubjectMark> Marks { get; set; }
+        public virtual IEnumerable<Subject> Subjects { get; set; }
+        public virtual IEnumerable<StudentNote> StudentNotes { get; set; }
     }
 }

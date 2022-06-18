@@ -1,13 +1,14 @@
-﻿namespace VirtualAcademy.Domain.Entities
+﻿using VirtualAcademy.Domain.Common;
+
+namespace VirtualAcademy.Domain.Entities
 {
-    public class StudentNote
+    public class StudentNote : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Description { get; set; }
         public Guid StudentId { get; set; }
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
         public Guid LecturerId { get; set; }
-        public Lecturer Lecturer { get; set; }
+        public virtual Lecturer Lecturer { get; set; }
         public DateTime DateOfNote { get; set; }
     }
 }

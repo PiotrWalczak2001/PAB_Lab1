@@ -17,15 +17,15 @@ namespace VirtualAcademy.Domain.Entities
         public TitleEnum TitleAfterGraduation { get; set; }
         public YearOfStudyEnum YearOfStudy { get; set; }
         public Guid CurrentSemesterId { get; set; }
-        public Semester CurrentSemester { get; set; }
-        public IEnumerable<Semester> Semesters { get; set; }
+        public virtual Semester CurrentSemester { get; set; }
+        public virtual IEnumerable<Semester> Semesters { get; set; }
         public DateTime StartStudiesDate { get; set; }
         public DateTime ExpectedGraduationDate { get; set; }
         public DateTime RecruitmentDate { get; set; }
         public bool IndividualCourse { get; set; }
-        public Guid CourseId { get; set; }
-        public Course Course { get; set; }
-        public IEnumerable<StudentGroup> StudentGroups { get; set; }
-        public IEnumerable<StudentNote> StudentNotes { get; set; }
+        public Guid? CourseId { get; set; }
+        public virtual Course Course { get; set; }
+        public virtual IEnumerable<StudentGroup> StudentGroups { get; set; }
+        public virtual IEnumerable<StudentNote> StudentNotes { get; set; }
     }
 }

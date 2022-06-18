@@ -1,20 +1,20 @@
-﻿using File = VirtualAcademy.Domain.Entities.File;
+﻿using VirtualAcademy.Domain.Common;
+using File = VirtualAcademy.Domain.Entities.File;
 
 namespace VirtualAcademy.Domain.Entities
 {
-    public class Academy
+    public class Academy : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string ShortDecription { get; set; }
         public string Description { get; set; }
         public bool IsDeleted { get; set; }
-        public IEnumerable<Employee> Employees { get; set; }
-        public IEnumerable<Student> Students { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Course> Courses { get; set; }
-        public IEnumerable<File> Files { get; set; }
+        public virtual IEnumerable<Employee> Employees { get; set; }
+        public virtual IEnumerable<Student> Students { get; set; }
+        public virtual IEnumerable<Department> Departments { get; set; }
+        public virtual IEnumerable<Course> Courses { get; set; }
+        public virtual IEnumerable<File> Files { get; set; }
         public Guid? ImageId { get; set; }
-        public File ImageFile { get; set; }
+        public virtual File ImageFile { get; set; }
     }
 }

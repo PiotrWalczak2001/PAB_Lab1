@@ -2,7 +2,14 @@
 {
     public interface IUnitOfWork
     {
-        Task SaveChanges();
+        IAcademyRepository AcademyRepository { get; }
+        ICourseRepository CourseRepository { get; }
+        IFileRepository FileRepository { get; }
+        ISubjectRepository SubjectRepository { get; }
+        IFileContentRepository FileContentRepository { get; }
+        IStudentRepository StudentRepository { get; }
+        ISubjectMarkRepository SubjectMarkRepository { get; }
+        Task SaveChangesAsync();
         void Dispose();
     }
 }

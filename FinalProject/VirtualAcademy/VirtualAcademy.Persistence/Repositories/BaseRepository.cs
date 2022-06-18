@@ -1,37 +1,48 @@
-﻿using VirtualAcademy.Application.Contracts.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using VirtualAcademy.Application.Contracts.Persistence;
+using VirtualAcademy.Domain.Common;
 
 namespace VirtualAcademy.Persistence.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _dbContext;
+        protected readonly AppDbContext _dbContext;
         public BaseRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public Task<IEnumerable<T>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetByIdAsync(Guid id)
+            => await _dbContext.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
 
-        public Task<T> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<T>> GetAllAsync()
+            => await _dbContext.Set<T>().ToListAsync();
 
-        public Task AddAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<T>> GetAllByIdsAsync(IEnumerable<Guid> ids)
+            => await _dbContext.Set<T>().Where(x => ids.Contains(x.Id)).ToListAsync();
 
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task AddAsync(T entity)
+            => await _dbContext.Set<T>().AddAsync(entity);
 
-        public Task UpdateAsync(T entity)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
+            => await _dbContext.Set<T>().AddRangeAsync(entities);
+        public void Delete(T entity)
+            => _dbContext.Set<T>().Remove(entity);
+        public async Task DeleteByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await GetByIdAsync(id);
+
+            if(entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _dbContext.Set<T>().Remove(entity);
         }
+        public void DeleteRange(IEnumerable<T> entities)
+            => _dbContext.Set<T>().RemoveRange(entities);
+        public void Update(T entity)
+            => _dbContext.Set<T>().Update(entity);
+
+        public void UpdateRange(IEnumerable<T> entities)
+            => _dbContext.Set<T>().UpdateRange(entities);
+
     }
 }

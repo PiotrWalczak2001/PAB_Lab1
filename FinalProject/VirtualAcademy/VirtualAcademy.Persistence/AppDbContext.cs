@@ -31,13 +31,15 @@ namespace VirtualAcademy.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Academy>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<Department>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<Course>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<File>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<Group>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<Semester>().HasQueryFilter(x => x.IsDeleted != false);
-            modelBuilder.Entity<Subject>().HasQueryFilter(x => x.IsDeleted != false);
+            modelBuilder.Entity<Academy>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Department>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Course>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<File>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Group>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Semester>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Subject>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Employee>().HasQueryFilter(x => x.StillWorking == true && x.IsDeleted == false);
+            modelBuilder.Entity<Student>().HasQueryFilter(x => x.IsStudying == true && x.IsDeleted == false);
 
             modelBuilder.Entity<Academy>().HasMany(a => a.Departments)
                                           .WithOne(d => d.Academy)

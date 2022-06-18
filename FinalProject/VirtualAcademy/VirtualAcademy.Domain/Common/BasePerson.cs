@@ -3,11 +3,10 @@ using VirtualAcademy.Domain.Enums;
 
 namespace VirtualAcademy.Domain.Common
 {
-    public abstract class BasePerson
+    public abstract class BasePerson : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid AcademyId { get; set; }
-        public Academy Academy { get; set; }
+        public virtual Academy Academy { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Surname { get; set; }

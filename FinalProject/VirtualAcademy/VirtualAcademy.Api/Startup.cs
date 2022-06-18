@@ -29,10 +29,10 @@ namespace VirtualAcademy.Api
             {
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
+                    Name = "Authorization",
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
                     Enter 'Bearer' [space] and then your token in the text input below.
                     \r\n\r\nExample: 'Bearer 12345abcdef'",
-                    Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
@@ -74,16 +74,17 @@ namespace VirtualAcademy.Api
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-            app.UseAuthentication();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Virtual Academy API");
             });
 
+            app.UseRouting();
+
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

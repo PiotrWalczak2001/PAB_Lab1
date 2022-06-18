@@ -17,7 +17,7 @@ namespace VirtualAcademy.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -543,7 +543,7 @@ namespace VirtualAcademy.Persistence.Migrations
                     b.Property<string>("CountryDocumentCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CourseId")
+                    b.Property<Guid?>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CurrentSemesterId")
@@ -681,9 +681,6 @@ namespace VirtualAcademy.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AcademyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CourseId")
@@ -921,8 +918,7 @@ namespace VirtualAcademy.Persistence.Migrations
                     b.HasOne("VirtualAcademy.Domain.Entities.Course", "Course")
                         .WithMany("Students")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("VirtualAcademy.Domain.Entities.Semester", "CurrentSemester")
                         .WithMany()

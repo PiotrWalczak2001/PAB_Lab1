@@ -6,50 +6,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Academies\Services\**" />
+    <EmbeddedResource Remove="Features\Academies\Services\**" />
+    <None Remove="Features\Academies\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VirtualAcademy.Domain\VirtualAcademy.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Employee\Commands\" />
-    <Folder Include="Features\Employee\Models\" />
-    <Folder Include="Features\Employee\Queries\" />
-    <Folder Include="Features\Employee\Services\" />
-    <Folder Include="Features\Course\Commands\" />
-    <Folder Include="Features\Course\Models\" />
-    <Folder Include="Features\Course\Queries\" />
-    <Folder Include="Features\Course\Services\" />
-    <Folder Include="Features\File\Commands\" />
-    <Folder Include="Features\File\Models\" />
-    <Folder Include="Features\File\Queries\" />
-    <Folder Include="Features\File\Services\" />
-    <Folder Include="Features\Group\Commands\" />
-    <Folder Include="Features\Group\Models\" />
-    <Folder Include="Features\Group\Queries\" />
-    <Folder Include="Features\Group\Services\" />
-    <Folder Include="Features\Lecturer\Commands\" />
-    <Folder Include="Features\Lecturer\Models\" />
-    <Folder Include="Features\Lecturer\Queries\" />
-    <Folder Include="Features\Lecturer\Services\" />
-    <Folder Include="Features\Semester\Commands\" />
-    <Folder Include="Features\Semester\Models\" />
-    <Folder Include="Features\Semester\Queries\" />
-    <Folder Include="Features\Semester\Services\" />
-    <Folder Include="Features\Student\Commands\" />
-    <Folder Include="Features\Student\Models\" />
-    <Folder Include="Features\Student\Queries\" />
-    <Folder Include="Features\Student\Services\" />
-    <Folder Include="Features\Subject\Commands\" />
-    <Folder Include="Features\Subject\Models\" />
-    <Folder Include="Features\Subject\Queries\" />
-    <Folder Include="Features\Subject\Services\" />
-    <Folder Include="Features\Department\Commands\" />
-    <Folder Include="Features\Department\Models\" />
-    <Folder Include="Features\Department\Queries\" />
-    <Folder Include="Features\Department\Services\" />
-    <Folder Include="Features\Academy\Commands\" />
-    <Folder Include="Features\Academy\Models\" />
-    <Folder Include="Features\Academy\Services\" />
-    <Folder Include="Features\Academy\Queries\" />
+    <Folder Include="Features\Departments\Commands\CreateDepartment\" />
+    <Folder Include="Features\Departments\Commands\DeleteDepartment\" />
+    <Folder Include="Features\Departments\Commands\UpdateDepartment\" />
+    <Folder Include="Features\Departments\Queries\GetDepartmentsByAcademyId\" />
+    <Folder Include="Features\Departments\Queries\GetDepartmentById\" />
+    <Folder Include="Features\Employees\Commands\AddEmployee\" />
+    <Folder Include="Features\Employees\Commands\DeleteEmployee\" />
+    <Folder Include="Features\Employees\Commands\UpdateEmployee\" />
+    <Folder Include="Features\Employees\Queries\GetAllEmployeesByAcademyId\" />
+    <Folder Include="Features\Employees\Queries\GetEmployeeById\" />
+    <Folder Include="Features\Files\Commands\DeleteFile\" />
+    <Folder Include="Features\Files\Commands\UploadFile\" />
+    <Folder Include="Features\Files\Queries\GetAcademyImage\" />
+    <Folder Include="Features\Groups\Commands\CreateGroup\" />
+    <Folder Include="Features\Groups\Commands\DeleteGroup\" />
+    <Folder Include="Features\Groups\Commands\UpdateGroup\" />
+    <Folder Include="Features\Groups\Models\" />
+    <Folder Include="Features\Groups\Queries\GetAllGroupsByAcademyId\" />
+    <Folder Include="Features\Groups\Queries\GetAllStudentGroups\" />
+    <Folder Include="Features\Lecturers\Commands\" />
+    <Folder Include="Features\Lecturers\Queries\" />
+    <Folder Include="Features\Lecturers\Services\" />
+    <Folder Include="Features\Semesters\Commands\" />
+    <Folder Include="Features\Semesters\Models\" />
+    <Folder Include="Features\Semesters\Queries\" />
+    <Folder Include="Features\Students\Commands\" />
+    <Folder Include="Features\Students\Models\" />
+    <Folder Include="Features\Students\Queries\" />
+    <Folder Include="Features\Students\Services\" />
+    <Folder Include="Features\Subjects\Commands\" />
+    <Folder Include="Features\Subjects\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

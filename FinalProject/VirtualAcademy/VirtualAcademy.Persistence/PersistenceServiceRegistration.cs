@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Text;
 using VirtualAcademy.Application.Auth;
+using VirtualAcademy.Application.Contracts.Persistence;
+using VirtualAcademy.Persistence.Repositories;
 
 namespace VirtualAcademy.Persistence
 {
@@ -17,6 +19,8 @@ namespace VirtualAcademy.Persistence
         {
             services.Configure<JSONWebTokensSettings>(configuration.GetSection("JSONWebTokensSettings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("VirtualAcademyConnectionString")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
