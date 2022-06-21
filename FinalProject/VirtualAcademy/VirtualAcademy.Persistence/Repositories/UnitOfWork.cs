@@ -12,6 +12,7 @@ namespace VirtualAcademy.Persistence.Repositories
         public ISubjectRepository SubjectRepository { get; private set; }
         public IStudentRepository StudentRepository { get; private set; }
         public ISubjectMarkRepository SubjectMarkRepository { get; private set; }
+        public IDepartmentRepository DepartmentRepository { get; private set; }
         public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -22,6 +23,7 @@ namespace VirtualAcademy.Persistence.Repositories
             SubjectRepository = new SubjectRepository(_dbContext);
             StudentRepository = new StudentRepository(_dbContext);
             SubjectMarkRepository = new SubjectMarkRepository(_dbContext);
+            DepartmentRepository = new DepartmentRepository(_dbContext);
         }
 
         public async Task SaveChangesAsync()

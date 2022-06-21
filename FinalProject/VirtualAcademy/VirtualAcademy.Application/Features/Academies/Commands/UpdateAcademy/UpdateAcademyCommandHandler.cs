@@ -12,11 +12,17 @@ namespace VirtualAcademy.Application.Features.Academies.Commands.UpdateAcademy
         }
         public async Task<Guid> Handle(UpdateAcademyCommand request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.Id.ToString()))
+                throw new ArgumentNullException(nameof(request.Id));
+
             // to do validation and permissions
             var academyToUpdate = await _unitOfWork.AcademyRepository.GetByIdAsync(request.Id);
 
             if (academyToUpdate == null)
                 throw new ArgumentNullException(nameof(academyToUpdate));
+
+            if (string.IsNullOrEmpty(request.Name))
+                throw new ArgumentNullException(nameof(request.Name));
 
             academyToUpdate.Name = request.Name;
             academyToUpdate.Description = request.Description;

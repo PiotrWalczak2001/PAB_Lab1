@@ -9,6 +9,7 @@
         IFileContentRepository FileContentRepository { get; }
         IStudentRepository StudentRepository { get; }
         ISubjectMarkRepository SubjectMarkRepository { get; }
+        IDepartmentRepository DepartmentRepository { get; }
         Task SaveChangesAsync();
         void Dispose();
     }

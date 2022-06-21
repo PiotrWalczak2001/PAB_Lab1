@@ -19,6 +19,9 @@ namespace VirtualAcademy.Application.Features.Academies.Commands.DeleteAcademy
         }
         public async Task<Unit> Handle(DeleteAcademyCommand request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.AcademyId.ToString()))
+                throw new ArgumentNullException(nameof(request.AcademyId));
+
             var academyToDelete = await _unitOfWork.AcademyRepository.GetByIdWithAllDetailsAsync(request.AcademyId); 
 
             if (academyToDelete == null)

@@ -2,16 +2,16 @@
 using VirtualAcademy.Application.Contracts.Persistence;
 using VirtualAcademy.Domain.Entities;
 
-namespace VirtualAcademy.Application.Features.Courses.Commands.CreateCourse
+namespace VirtualAcademy.Application.Features.Departments.Commands.CreateDepartment
 {
-    public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, Guid>
+    public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, Guid>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CreateCourseCommandHandler(IUnitOfWork unitOfWork)
+        public CreateDepartmentCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<Guid> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Name))
                 throw new ArgumentNullException(nameof(request.Name));
@@ -19,17 +19,19 @@ namespace VirtualAcademy.Application.Features.Courses.Commands.CreateCourse
             if (string.IsNullOrEmpty(request.AcademyId.ToString()))
                 throw new ArgumentNullException(nameof(request.AcademyId));
 
-            Course newCourse = new()
+            // fast validation
+
+            Department newDepartment = new()
             {
-                Id = new Guid(),
-                AcademyId = request.AcademyId,
                 Name = request.Name,
-                Description = request.Description
+                AcademyId = request.AcademyId,
+                Id = Guid.NewGuid()
             };
 
-            await _unitOfWork.CourseRepository.AddAsync(newCourse);
+            await _unitOfWork.DepartmentRepository.AddAsync(newDepartment);
             await _unitOfWork.SaveChangesAsync();
-            return newCourse.Id;
+
+            return newDepartment.Id;
         }
     }
 }

@@ -16,11 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Departments\Commands\CreateDepartment\" />
-    <Folder Include="Features\Departments\Commands\DeleteDepartment\" />
-    <Folder Include="Features\Departments\Commands\UpdateDepartment\" />
-    <Folder Include="Features\Departments\Queries\GetDepartmentsByAcademyId\" />
-    <Folder Include="Features\Departments\Queries\GetDepartmentById\" />
     <Folder Include="Features\Employees\Commands\AddEmployee\" />
     <Folder Include="Features\Employees\Commands\DeleteEmployee\" />
     <Folder Include="Features\Employees\Commands\UpdateEmployee\" />
