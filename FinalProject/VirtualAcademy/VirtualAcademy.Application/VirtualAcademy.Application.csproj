@@ -25,9 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\AcademyMails\Commands\" />
-    <Folder Include="Features\AcademyMails\Models\" />
-    <Folder Include="Features\AcademyMails\Queries\" />
     <Folder Include="Features\Finances\Commands\" />
     <Folder Include="Features\Finances\Models\" />
     <Folder Include="Features\Finances\Queries\" />

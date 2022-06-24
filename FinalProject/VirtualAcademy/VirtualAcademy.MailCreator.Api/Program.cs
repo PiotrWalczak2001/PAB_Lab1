@@ -13,6 +13,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/Mails", () => new List<string>() { "Mail kogos1", "Mail kogos2" }).WithName("GetMailAccounts");
+app.MapGet("/createMail", (string firstName, string lastName) => firstName + "." + lastName + "@virtualacademy.edu.com").WithName("GetNewMailAccount");
 
 app.Run();

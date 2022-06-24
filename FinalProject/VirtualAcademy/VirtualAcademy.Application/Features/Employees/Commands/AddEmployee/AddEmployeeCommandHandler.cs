@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using VirtualAcademy.Application.Contracts.Persistence;
+using VirtualAcademy.Application.Features.AcademyMails.Queries.CreateAcademyMail;
 using VirtualAcademy.Domain.Entities;
 
 namespace VirtualAcademy.Application.Features.Employees.Commands.AddEmployee
@@ -7,16 +8,17 @@ namespace VirtualAcademy.Application.Features.Employees.Commands.AddEmployee
     public class AddEmployeeCommandHandler : IRequestHandler<AddEmployeeCommand, Guid>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AddEmployeeCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IMediator _mediator;
+        public AddEmployeeCommandHandler(IUnitOfWork unitOfWork, IMediator mediator)
         {
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
         public async Task<Guid> Handle(AddEmployeeCommand request, CancellationToken cancellationToken)
         {
             // to do validation + permissions
             var isLecturer = request.IsLecturer;
-
-            // academy mail creator
+            var academyMail = await _mediator.Send(new CreateAcademyMailQuery() { FirstName = request.FirstName, LastName = request.Surname });
 
             if (isLecturer)
             {
@@ -42,7 +44,8 @@ namespace VirtualAcademy.Application.Features.Employees.Commands.AddEmployee
                     PostOffice = request.PostOffice,
                     PrivateEmail = request.PrivateEmail,
                     PhoneNumber = request.PhoneNumber,
-                    DepartmentId = request.DepartmentId.GetValueOrDefault()
+                    DepartmentId = request.DepartmentId.GetValueOrDefault(),
+                    AcademyEmail = academyMail
                 };
                 await _unitOfWork.LecturerRepository.AddAsync(newLecturer);
                 await _unitOfWork.SaveChangesAsync();
@@ -71,6 +74,7 @@ namespace VirtualAcademy.Application.Features.Employees.Commands.AddEmployee
                 PostOffice = request.PostOffice,
                 PrivateEmail = request.PrivateEmail,
                 PhoneNumber = request.PhoneNumber,
+                AcademyEmail = academyMail
             };
 
             await _unitOfWork.EmployeeRepository.AddAsync(newEmployee);

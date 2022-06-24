@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using VirtualAcademy.Application.Contracts.Persistence;
+using VirtualAcademy.Application.Features.AcademyMails.Queries.CreateAcademyMail;
 using VirtualAcademy.Domain.Entities;
 
 namespace VirtualAcademy.Application.Features.Students.Commands.AddStudent
@@ -7,9 +8,11 @@ namespace VirtualAcademy.Application.Features.Students.Commands.AddStudent
     public class AddStudentCommandHandler : IRequestHandler<AddStudentCommand, Guid>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AddStudentCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IMediator _mediator;
+        public AddStudentCommandHandler(IUnitOfWork unitOfWork, IMediator mediator)
         {
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
         public async Task<Guid> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
@@ -48,8 +51,8 @@ namespace VirtualAcademy.Application.Features.Students.Commands.AddStudent
                 IndividualCourse = request.IndividualCourse,
                 StartStudiesDate = request.StartStudiesDate
             };
-
-            //academy mail service
+            newStudent.AcademyEmail = await _mediator.Send(new CreateAcademyMailQuery()
+                { FirstName = request.FirstName, LastName = request.Surname });
 
             await _unitOfWork.StudentRepository.AddAsync(newStudent);
             await _unitOfWork.SaveChangesAsync();
