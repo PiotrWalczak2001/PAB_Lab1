@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using VirtualAcademy.Application.Auth;
 using VirtualAcademy.Application.Contracts.Persistence;
 using VirtualAcademy.Persistence.Repositories;
@@ -19,10 +19,9 @@ namespace VirtualAcademy.Persistence
         {
             services.Configure<JSONWebTokensSettings>(configuration.GetSection("JSONWebTokensSettings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("VirtualAcademyConnectionString")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             services.AddAuthentication(options =>
             {

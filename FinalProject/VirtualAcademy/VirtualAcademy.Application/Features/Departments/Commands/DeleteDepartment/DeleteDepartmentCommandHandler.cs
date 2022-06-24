@@ -12,10 +12,13 @@ namespace VirtualAcademy.Application.Features.Departments.Commands.DeleteDepartm
         }
         public async Task<Unit> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(request.DepartmentId.ToString()))
-                throw new ArgumentNullException(nameof(request.DepartmentId));
+            var departmentToDelete = await _unitOfWork.DepartmentRepository.GetByIdAsync(request.DepartmentId);
+            if (departmentToDelete == null)
+                throw new ArgumentNullException(nameof(departmentToDelete));
 
-            await _unitOfWork.DepartmentRepository.DeleteByIdAsync(request.DepartmentId);
+            departmentToDelete.IsDeleted = true;
+
+            _unitOfWork.DepartmentRepository.Update(departmentToDelete);
             await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;

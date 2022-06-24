@@ -19,6 +19,7 @@ namespace VirtualAcademy.Application.Features.Academies.Commands.DeleteAcademy
         }
         public async Task<Unit> Handle(DeleteAcademyCommand request, CancellationToken cancellationToken)
         {
+            
             if (string.IsNullOrEmpty(request.AcademyId.ToString()))
                 throw new ArgumentNullException(nameof(request.AcademyId));
 
@@ -29,14 +30,20 @@ namespace VirtualAcademy.Application.Features.Academies.Commands.DeleteAcademy
             
             await _fileService.DeleteFilesByApplicationId(academyToDelete.Id);
             await _courseService.DeleteAllCoursesByAcademyId(academyToDelete.Id);
-            academyToDelete.Departments.ToList().ForEach(department => department.IsDeleted = true);
 
+            academyToDelete.Departments.ToList().ForEach(department => department.IsDeleted = true);
             academyToDelete.Students.ToList().ForEach(student => student.IsDeleted = true);
             academyToDelete.Employees.ToList().ForEach(employee => employee.IsDeleted = true);
 
-            academyToDelete.IsDeleted = true;
-            await _unitOfWork.SaveChangesAsync();
+            _unitOfWork.DepartmentRepository.UpdateRange(academyToDelete.Departments);
+            _unitOfWork.StudentRepository.UpdateRange(academyToDelete.Students);
+            _unitOfWork.EmployeeRepository.UpdateRange(academyToDelete.Employees);
 
+            academyToDelete.IsDeleted = true;
+
+            _unitOfWork.AcademyRepository.Update(academyToDelete);
+            await _unitOfWork.SaveChangesAsync();
+            
             return Unit.Value;
         }
     }

@@ -26,6 +26,9 @@ namespace VirtualAcademy.Application.Features.Courses.Commands.UpdateCourse
             courseToUpdate.Name = request.Name;
             courseToUpdate.Description = request.Description;
 
+            _unitOfWork.CourseRepository.Update(courseToUpdate);
+            await _unitOfWork.SaveChangesAsync();
+
             return courseToUpdate.Id;
         }
     }

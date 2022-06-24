@@ -10,6 +10,9 @@
         IStudentRepository StudentRepository { get; }
         ISubjectMarkRepository SubjectMarkRepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
+        IEmployeeRepository EmployeeRepository { get; }
+        ILecturerRepository LecturerRepository { get; }
+        ISemesterRepository SemesterRepository { get; }
         Task SaveChangesAsync();
         void Dispose();
     }

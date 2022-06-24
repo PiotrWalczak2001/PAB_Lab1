@@ -15,8 +15,6 @@ namespace VirtualAcademy.Domain.Entities
         public double? Average { get; set; }
         public virtual IEnumerable<SubjectMark> Marks { get; set; }
         public SemesterStatusEnum Status { get; set; }
-        public bool IsClosed { get; set; }
-        public bool IsCurrent { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

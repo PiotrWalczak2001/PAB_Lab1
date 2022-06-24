@@ -7,8 +7,17 @@
 
   <ItemGroup>
     <Compile Remove="Features\Academies\Services\**" />
+    <Compile Remove="Features\Lecturers\Commands\**" />
+    <Compile Remove="Features\Lecturers\Services\**" />
+    <Compile Remove="Features\Students\Services\**" />
     <EmbeddedResource Remove="Features\Academies\Services\**" />
+    <EmbeddedResource Remove="Features\Lecturers\Commands\**" />
+    <EmbeddedResource Remove="Features\Lecturers\Services\**" />
+    <EmbeddedResource Remove="Features\Students\Services\**" />
     <None Remove="Features\Academies\Services\**" />
+    <None Remove="Features\Lecturers\Commands\**" />
+    <None Remove="Features\Lecturers\Services\**" />
+    <None Remove="Features\Students\Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,38 +25,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Employees\Commands\AddEmployee\" />
-    <Folder Include="Features\Employees\Commands\DeleteEmployee\" />
-    <Folder Include="Features\Employees\Commands\UpdateEmployee\" />
-    <Folder Include="Features\Employees\Queries\GetAllEmployeesByAcademyId\" />
-    <Folder Include="Features\Employees\Queries\GetEmployeeById\" />
-    <Folder Include="Features\Files\Commands\DeleteFile\" />
-    <Folder Include="Features\Files\Commands\UploadFile\" />
-    <Folder Include="Features\Files\Queries\GetAcademyImage\" />
-    <Folder Include="Features\Groups\Commands\CreateGroup\" />
-    <Folder Include="Features\Groups\Commands\DeleteGroup\" />
-    <Folder Include="Features\Groups\Commands\UpdateGroup\" />
-    <Folder Include="Features\Groups\Models\" />
-    <Folder Include="Features\Groups\Queries\GetAllGroupsByAcademyId\" />
-    <Folder Include="Features\Groups\Queries\GetAllStudentGroups\" />
-    <Folder Include="Features\Lecturers\Commands\" />
-    <Folder Include="Features\Lecturers\Queries\" />
-    <Folder Include="Features\Lecturers\Services\" />
-    <Folder Include="Features\Semesters\Commands\" />
-    <Folder Include="Features\Semesters\Models\" />
-    <Folder Include="Features\Semesters\Queries\" />
-    <Folder Include="Features\Students\Commands\" />
-    <Folder Include="Features\Students\Models\" />
-    <Folder Include="Features\Students\Queries\" />
-    <Folder Include="Features\Students\Services\" />
-    <Folder Include="Features\Subjects\Commands\" />
-    <Folder Include="Features\Subjects\Queries\" />
+    <Folder Include="Features\AcademyMails\Commands\" />
+    <Folder Include="Features\AcademyMails\Models\" />
+    <Folder Include="Features\AcademyMails\Queries\" />
+    <Folder Include="Features\Finances\Commands\" />
+    <Folder Include="Features\Finances\Models\" />
+    <Folder Include="Features\Finances\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.6" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.10.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
   </ItemGroup>
 
 </Project>

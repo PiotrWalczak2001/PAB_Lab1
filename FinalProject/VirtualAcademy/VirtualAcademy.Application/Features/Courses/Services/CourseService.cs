@@ -6,31 +6,27 @@ namespace VirtualAcademy.Application.Features.Courses.Services
     public class CourseService : ICourseService
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public CourseService(IUnitOfWork unitOfWork)
+        private readonly ISubjectService _subjectService;
+        public CourseService(IUnitOfWork unitOfWork, ISubjectService subjectService)
         {
             _unitOfWork = unitOfWork;
+            _subjectService = subjectService;
         }
 
         public async Task DeleteAllCoursesByAcademyId(Guid academyId)
         {
-            var coursesToDelete = await _unitOfWork.CourseRepository.GetAllByAcademyIdAsync(academyId);
+            var coursesToDelete = (await _unitOfWork.CourseRepository.GetAllByAcademyIdAsync(academyId)).ToList();
 
             foreach (var course in coursesToDelete)
             {
                 var students = (await _unitOfWork.StudentRepository.GetAllByCourseIdAsync(course.Id)).ToList();
                 students.ForEach(x => x.CourseId = null);
 
-                var subjectsToDeleteByCourseId = await _unitOfWork.SubjectRepository.GetAllSubjectsWithMarksByCourseIdAsync(course.Id);
-                foreach (var subject in subjectsToDeleteByCourseId)
-                {
-                    _unitOfWork.SubjectMarkRepository.DeleteRange(subject.Marks);
-                    //to do group service and deleting groups
-                    subject.IsDeleted = true;
-                }
+                await _subjectService.DeleteAllSubjectsWithMarksByCourseId(course.Id);
 
                 course.IsDeleted = true;
             }
+            _unitOfWork.CourseRepository.UpdateRange(coursesToDelete);
         }
     }
 }

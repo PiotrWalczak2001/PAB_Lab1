@@ -23,6 +23,8 @@ namespace VirtualAcademy.Application.Features.Courses.Commands.DeleteCourse
             var students = (await _unitOfWork.StudentRepository.GetAllByCourseIdAsync(courseToDelete.Id)).ToList();
             students.ForEach(x => x.CourseId = null);
 
+            _unitOfWork.StudentRepository.UpdateRange(students);
+
             var subjectsToDeleteByCourseId = await _unitOfWork.SubjectRepository.GetAllSubjectsWithMarksByCourseIdAsync(courseToDelete.Id);
             foreach (var subject in subjectsToDeleteByCourseId)
             {
@@ -30,10 +32,13 @@ namespace VirtualAcademy.Application.Features.Courses.Commands.DeleteCourse
                 //to do group service and deleting groups
                 subject.IsDeleted = true;
             }
+            _unitOfWork.SubjectRepository.UpdateRange(subjectsToDeleteByCourseId);
 
             courseToDelete.IsDeleted = true;
             
+            _unitOfWork.CourseRepository.Update(courseToDelete);
             await _unitOfWork.SaveChangesAsync();
+
             return Unit.Value;
         }
     }
