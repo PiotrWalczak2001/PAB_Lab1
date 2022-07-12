@@ -26,7 +26,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="academyId"></param>
         /// <returns>List of employees with specific academy id</returns>
         [HttpGet("all/{academyId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllEmployeesByAcademyId(Guid academyId)
         {
             var employees = await _mediator.Send(new GetAllEmployeesByAcademyIdQuery() { AcademyId = academyId });
@@ -39,7 +39,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="employeeId">Id of employee</param>
         /// <returns>Employee info model</returns>
         [HttpGet("{employeeId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetEmployeeById(Guid employeeId)
         {
             var employee = await _mediator.Send(new GetEmployeeByIdQuery() { Id = employeeId });
@@ -52,7 +52,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="addEmployeeCommand">Employee params</param>
         /// <returns>Guid of new created employee</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = " Admin")]
         public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeCommand addEmployeeCommand)
         {
             var id = await _mediator.Send(addEmployeeCommand);
@@ -65,7 +65,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="updateEmployeeCommand">Employee params</param>
         /// <returns>Guid of updated employee</returns>
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeCommand updateEmployeeCommand)
         {
             var id = await _mediator.Send(updateEmployeeCommand);
@@ -77,7 +77,7 @@ namespace VirtualAcademy.Api.Controllers
         /// </summary>
         /// <param name="deleteEmployeeCommand">Id of employee to delete</param>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEmployeeById([FromBody] DeleteEmployeeCommand deleteEmployeeCommand)
         {
             await _mediator.Send(deleteEmployeeCommand);

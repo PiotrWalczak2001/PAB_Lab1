@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VirtualAcademy.Domain.Entities;
 using File = VirtualAcademy.Domain.Entities.File;
@@ -128,7 +129,122 @@ namespace VirtualAcademy.Persistence
             modelBuilder.Entity<SubjectMark>().HasOne(sm => sm.Subject)
                                               .WithMany(s => s.Marks)
                                               .HasForeignKey(s => s.SubjectId)
-                                              .OnDelete(DeleteBehavior.Restrict); ;
+                                              .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "bb352f3f-dfd1-4c23-a879-84a8885107c6",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "29f2dfb3-e391-4b46-9c1b-dfd360bdc40f",
+                Name = "Lecturer",
+                NormalizedName = "LECTURER"
+            });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "9c0a5871-fd62-46f6-9aa0-6253ddf8436a",
+                Name = "Student",
+                NormalizedName = "STUDENT"
+            });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "41955396-834b-4ee6-901a-fc9dfbd0b92d",
+                Name = "User",
+                NormalizedName = "USER"
+            });
+
+
+            var adminUser = new IdentityUser
+            {
+                Id = "d2420772-683a-40ad-a5b7-9bf93cccc1df",
+                UserName = "Test Admin",
+                NormalizedUserName = "TEST ADMIN",
+                Email = "testadmin@mail.com",
+                NormalizedEmail = "TESTADMIN@MAIL.COM",
+                EmailConfirmed = true,
+            };
+            var adminPassword = new PasswordHasher<IdentityUser>();
+            var adminHashed = adminPassword.HashPassword(adminUser, "Admin!12");
+            adminUser.PasswordHash = adminHashed;
+
+            modelBuilder.Entity<IdentityUser>().HasData(adminUser);
+
+
+            var lecturerUser = new IdentityUser
+            {
+                Id = "1737574a-e41b-4f2d-b288-da7c2323b4e6",
+                UserName = "Test Lecturer",
+                NormalizedUserName = "TEST LECTURER",
+                Email = "testlecturer@mail.com",
+                NormalizedEmail = "TESTLECTURER@MAIL.COM",
+                EmailConfirmed = true,
+            };
+            var lecturerPassword = new PasswordHasher<IdentityUser>();
+            var lecturerHashed = lecturerPassword.HashPassword(lecturerUser, "Lecturer!12");
+            lecturerUser.PasswordHash = lecturerHashed;
+
+            modelBuilder.Entity<IdentityUser>().HasData(lecturerUser);
+
+
+            var studentUser = new IdentityUser
+            {
+                Id = "dcf71a67-2e23-4582-a461-bf856c1133e3",
+                UserName = "Test Student",
+                NormalizedUserName = "TEST STUDENT",
+                Email = "teststudent@mail.com",
+                NormalizedEmail = "TESTSTUDENT@MAIL.COM",
+                EmailConfirmed = true,
+            };
+            var studentPassword = new PasswordHasher<IdentityUser>();
+            var studentHashed = studentPassword.HashPassword(studentUser, "Student!12");
+            studentUser.PasswordHash = studentHashed;
+
+            modelBuilder.Entity<IdentityUser>().HasData(studentUser);
+
+
+            var normalUser = new IdentityUser
+            {
+                Id = "63f3fc0b-ee4a-453e-802b-7e6b554d798f",
+                UserName = "Test User",
+                NormalizedUserName = "TEST USER",
+                Email = "testuser@mail.com",
+                NormalizedEmail = "TESTUSER@MAIL.COM",
+                EmailConfirmed = true,
+            };
+            var normalPassword = new PasswordHasher<IdentityUser>();
+            var normalHashed = normalPassword.HashPassword(normalUser, "User!12");
+            normalUser.PasswordHash = normalHashed;
+
+            modelBuilder.Entity<IdentityUser>().HasData(normalUser);
+
+
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "bb352f3f-dfd1-4c23-a879-84a8885107c6",
+                UserId = "d2420772-683a-40ad-a5b7-9bf93cccc1df"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "29f2dfb3-e391-4b46-9c1b-dfd360bdc40f",
+                UserId = "1737574a-e41b-4f2d-b288-da7c2323b4e6"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "9c0a5871-fd62-46f6-9aa0-6253ddf8436a",
+                UserId = "dcf71a67-2e23-4582-a461-bf856c1133e3"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "41955396-834b-4ee6-901a-fc9dfbd0b92d",
+                UserId = "63f3fc0b-ee4a-453e-802b-7e6b554d798f"
+            });
         }
     }
 }

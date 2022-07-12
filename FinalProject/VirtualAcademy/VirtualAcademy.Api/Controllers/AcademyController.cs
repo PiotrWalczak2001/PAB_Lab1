@@ -51,7 +51,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="createAcademyCommand">Academy params</param>
         /// <returns>Guid of new created academy</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAcademy([FromBody] CreateAcademyCommand createAcademyCommand)
         {
             var id = await _mediator.Send(createAcademyCommand);
@@ -64,7 +64,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="updateAcademyCommand">Academy params</param>
         /// <returns>Guid of updated academy</returns>
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAcademy([FromBody] UpdateAcademyCommand updateAcademyCommand)
         {
             var id = await _mediator.Send(updateAcademyCommand);
@@ -76,7 +76,7 @@ namespace VirtualAcademy.Api.Controllers
         /// </summary>
         /// <param name="deleteAcademyCommand">Id of academy to delete</param>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAcademyById([FromBody] DeleteAcademyCommand deleteAcademyCommand)
         {
             await _mediator.Send(deleteAcademyCommand);

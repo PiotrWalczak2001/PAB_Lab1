@@ -24,7 +24,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="studentId"></param>
         /// <returns>Semester info model</returns>
         [HttpGet("active/{studentId}")]
-        [Authorize]
+        [Authorize(Roles = "Student, Lecturer, Admin")]
         public async Task<IActionResult> GetActiveSemesterByStudentId(Guid studentId)
         {
             var semester = await _mediator.Send(new GetActiveSemesterByStudentIdQuery() { StudentId = studentId });
@@ -38,7 +38,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <returns>Guid of started semester</returns>
         [HttpPost]
         [Route("start")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> StartSemester([FromBody] StartSemesterCommand startSemesterCommand)
         {
             var id = await _mediator.Send(startSemesterCommand);
@@ -51,7 +51,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="endSemesterCommand">Id of semester to end</param>
         [HttpPost]
         [Route("end")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EndSemesterById([FromBody] EndSemesterCommand endSemesterCommand)
         {
             await _mediator.Send(endSemesterCommand);

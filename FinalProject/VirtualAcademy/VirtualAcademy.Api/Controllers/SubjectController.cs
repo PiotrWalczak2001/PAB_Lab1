@@ -25,7 +25,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="subjectId">Id of subject</param>
         /// <returns>subject info model</returns>
         [HttpGet("{subjectId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Student, Lecturer, Admin")]
         public async Task<IActionResult> GetSubjectById(Guid subjectId)
         {
             var subject = await _mediator.Send(new GetSubjectByIdQuery() { SubjectId = subjectId });
@@ -38,7 +38,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="createSubjectCommand">subject params</param>
         /// <returns>Guid of new created subject</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateSubject([FromBody] CreateSubjectCommand createSubjectCommand)
         {
             var id = await _mediator.Send(createSubjectCommand);
@@ -51,7 +51,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="updateSubjectCommand">subject params</param>
         /// <returns>Guid of updated subject</returns>
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateSubject([FromBody] UpdateSubjectCommand updateSubjectCommand)
         {
             var id = await _mediator.Send(updateSubjectCommand);
@@ -63,7 +63,7 @@ namespace VirtualAcademy.Api.Controllers
         /// </summary>
         /// <param name="deleteSubjectCommand">Id of subject to delete</param>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteSubjectById([FromBody] DeleteSubjectCommand deleteSubjectCommand)
         {
             await _mediator.Send(deleteSubjectCommand);

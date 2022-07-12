@@ -27,7 +27,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="academyId"></param>
         /// <returns>List of departments with specific academy id</returns>
         [HttpGet("all/{academyId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Student, Lecturer, Admin")]
         public async Task<IActionResult> GetAllDepartmentsByAcademyId(Guid academyId)
         {
             var departments = await _mediator.Send(new GetDepartmentsByAcademyIdQuery() { AcademyId = academyId });
@@ -40,7 +40,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="departmentId">Id of department</param>
         /// <returns>department info model</returns>
         [HttpGet("{departmentId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Student, Lecturer, Admin")]
         public async Task<IActionResult> GetDepartmentById(Guid departmentId)
         {
             var department = await _mediator.Send(new GetDepartmentByIdQuery() { Id = departmentId });
@@ -53,7 +53,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="createDepartmentCommand">Department params</param>
         /// <returns>Guid of new created department</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateDepartment([FromBody] CreateDepartmentCommand createDepartmentCommand)
         {
             var id = await _mediator.Send(createDepartmentCommand);
@@ -66,7 +66,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="updateDepartmentCommand">department params</param>
         /// <returns>Guid of updated department</returns>
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateDepartment([FromBody] UpdateDepartmentCommand updateDepartmentCommand)
         {
             var id = await _mediator.Send(updateDepartmentCommand);
@@ -78,7 +78,7 @@ namespace VirtualAcademy.Api.Controllers
         /// </summary>
         /// <param name="deleteDepartmentCommand">Id of department to delete</param>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteDepartmentById([FromBody] DeleteDepartmentCommand deleteDepartmentCommand)
         {
             await _mediator.Send(deleteDepartmentCommand);

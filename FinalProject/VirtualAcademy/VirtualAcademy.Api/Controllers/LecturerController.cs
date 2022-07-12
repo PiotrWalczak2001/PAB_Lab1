@@ -23,7 +23,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="academyId"></param>
         /// <returns>List of lecturers with specific academy id</returns>
         [HttpGet("all/{academyId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Student, Lecturer, Admin")]
         public async Task<IActionResult> GetAllLecturersByAcademyId(Guid academyId)
         {
             var lecturers = await _mediator.Send(new GetAllLecturersByAcademyIdQuery() { AcademyId = academyId });
@@ -36,7 +36,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="lecturerId">Id of lecturer</param>
         /// <returns>Lecturer info model</returns>
         [HttpGet("{lecturerId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Student, Lecturer, Admin")]
         public async Task<IActionResult> GetLecturerById(Guid lecturerId)
         {
             var lecturer = await _mediator.Send(new GetLecturerByIdQuery() { Id = lecturerId });

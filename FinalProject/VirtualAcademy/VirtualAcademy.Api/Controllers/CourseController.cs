@@ -26,7 +26,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="academyId"></param>
         /// <returns>List of courses with specific academy id</returns>
         [HttpGet("all/{academyId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Student, Lecturer, Admin")]
         public async Task<IActionResult> GetAllCoursesByAcademyId(Guid academyId)
         {
             var courses = await _mediator.Send(new GetCoursesByAcademyIdQuery() {AcademyId = academyId});
@@ -39,7 +39,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="courseId">Id of course</param>
         /// <returns>Course info model</returns>
         [HttpGet("{courseId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Student, Lecturer, Admin")]
         public async Task<IActionResult> GetCourseById(Guid courseId)
         {
             var course = await _mediator.Send(new GetCourseByIdQuery() { CourseId = courseId });
@@ -52,7 +52,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="createCourseCommand">Course params</param>
         /// <returns>Guid of new created course</returns>
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCourse([FromBody] CreateCourseCommand createCourseCommand)
         {
             var id = await _mediator.Send(createCourseCommand);
@@ -65,7 +65,7 @@ namespace VirtualAcademy.Api.Controllers
         /// <param name="updateCourseCommand">Course params</param>
         /// <returns>Guid of updated course</returns>
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCourse([FromBody] UpdateCourseCommand updateCourseCommand)
         {
             var id = await _mediator.Send(updateCourseCommand);
@@ -77,7 +77,7 @@ namespace VirtualAcademy.Api.Controllers
         /// </summary>
         /// <param name="deleteCourseCommand">Id of course to delete</param>
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCourseById([FromBody] DeleteCourseCommand deleteCourseCommand)
         {
             await _mediator.Send(deleteCourseCommand);
